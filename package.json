@@ -1,0 +1,27 @@
+{
+  "name": "node-file-cache",
+  "version": "0.1.0",
+  "description": "Saves json data to a local file.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/appcues/node-file-cache.git"
+  },
+  "keywords": [
+    "node",
+    "cache"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/appcues/node-file-cache/issues"
+  },
+  "homepage": "https://github.com/appcues/node-file-cache",
+  "dependencies": {
+    "debug": "^2.1.1",
+    "rsvp": "^3.0.17"
+  }
+}
