@@ -3,8 +3,9 @@ var debug = require('debug')('node-file-cache'),
   RSVP = require('rsvp');
 
 
-module.exports = function(loc) {
+module.exports = function(loc, ttl) {
   // Caching utilities.
+  if(!ttl){ ttl = 60000; } //Time to retain cached file
 
   return {
     put: function(filename, data) {
@@ -17,6 +18,16 @@ module.exports = function(loc) {
           } else {
             debug("Created local cache of " + filename + ".");
             resolve(data);
+            
+            debug("Removing file ("+path+") in "+ttl+" ms.");
+            setTiemout(function(){
+              debug("Removed file ("+path+")");
+              fs.unlink(path, function(err) {
+                if (err) {
+                   debug("Error removing file ("+path+") :" + err.toString());
+                }
+              })
+            }, ttl)
           }
         });
       })
