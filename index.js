@@ -5,12 +5,12 @@ var debug = require('debug')('node-file-cache'),
 
 module.exports = function(loc, ttl) {
   // Caching utilities.
-  if(!ttl){ ttl = 60000; } //Time to retain cached file
 
   return {
     put: function(filename, data) {
       var path = loc + "/" + filename;
       debug("Save started to " + path + ".");
+      
       return new RSVP.Promise(function(resolve, reject) {
         fs.writeFile(path, JSON.stringify(data), function(err) {
           if (err) {
@@ -27,7 +27,7 @@ module.exports = function(loc, ttl) {
                    debug("Error removing file ("+path+") :" + err.toString());
                 }
               })
-            }, ttl)
+            }, ttl || 60000)
           }
         });
       })
@@ -36,6 +36,7 @@ module.exports = function(loc, ttl) {
     get: function(filename) {
       var path = loc + "/" + filename;
       debug("Loading data from " + path + ".");
+      
       return new RSVP.Promise(function(resolve, reject) {
         fs.readFile(path, function(err, data) {
           if (err) {
