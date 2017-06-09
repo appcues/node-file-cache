@@ -20,7 +20,7 @@ module.exports = function(loc, ttl) {
             resolve(data);
             
             debug("Removing file ("+path+") in "+ttl+" ms.");
-            setTiemout(function(){
+            setTimeout(function(){
               debug("Removed file ("+path+")");
               fs.unlink(path, function(err) {
                 if (err) {
